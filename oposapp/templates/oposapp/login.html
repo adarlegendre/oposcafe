@@ -1,0 +1,91 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>OSPOS</title>
+
+    <link href="{% static 'oposapp/assets/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+
+    <link href="{% static 'oposapp/assets/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="loginColumns animated fadeInDown">
+        <div class="row">
+            {% for info in system_info_list%}
+            <div class="col-md-7">
+                
+                <img alt="image" src="{{info.photo.url}}" width="480px" height="314px" />
+              
+
+            </div>
+            {% endfor %}
+            <div class="col-md-5">
+                <div class="ibox-content">
+                        {% for message in messages %}
+
+                        <div class="alert alert-danger">
+                            <a class="close" href="#" data-dismiss="alert">×</a>
+    
+                            {{ message }}
+    
+                        </div>
+                           {% endfor %}
+                        <form class="m-t" role="form" action="login" method="post">
+                            {% csrf_token %}
+                            {% if next %}
+                                <input type="hidden" name="next" value="{{ next }}" />
+                            {% endif %}
+                            <div class="form-group">
+                                <label class="control-label" for="username">Username</label>
+                                <div class="controls">
+                                    <input class="form-control"  type="text" id="username" name="username"  placeholder="Username">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label" for="password">Password</label>
+                                <div class="controls">
+                                    <input class="form-control"  type="password" name="password" id="password" placeholder="Password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="controls">
+        
+                                    <button class="btn btn-primary block full-width m-b">Login</button>
+                                </div>
+                            </div>
+                            <p class="text-muted text-center">
+                                    <small>Problem Logging In?</small>
+                                </p>
+                                <a class="btn btn-sm btn-white btn-block" href="register.html">Contact Admin</a>
+                            </form>
+             
+                    <p class="m-t">
+                        <small>Powered by Webtailors Software Solutions</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+                Copyright OPOS systems
+            </div>
+            <div class="col-md-6 text-right">
+               <small>© 2018-2019</small>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

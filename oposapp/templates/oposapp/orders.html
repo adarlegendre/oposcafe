@@ -1,0 +1,390 @@
+
+
+{% extends "oposapp/base.html" %}
+{% block content%}
+{% load staticfiles %}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+            <div class="col-lg-12">
+        <button class="btn btn-xs btn-white active" style="width:20%;float:right;" onclick='print_sales()'><i class="fa fa-print" aria-hidden="true"></i>PRINT SALES</button>
+            </div>
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+
+                        <table class="table table-striped table-bordered table-hover orders" id="orders" >
+                        <thead>
+                        <tr>
+                                <th>Order ID</th>
+                            <th>Order Serial</th>
+                            <th data-hide="phone">Dish</th>
+                            <th data-hide="phone">Price</th>
+                            <th data-hide="phone">Date added</th>
+                            <th data-hide="phone">Waiter</th>
+                            <th data-hide="phone">Status</th>
+                            <th class="text-right">Action</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                                {% for orders in meals %}
+
+
+                        <tr>
+                                <td>
+                                        {{forloop.counter}}
+                                        
+                                </td>
+                            <td>
+                                    {{orders.name}}
+                                    
+                            </td>
+                            <td>
+                                   
+                                {{orders.dish}}  
+
+                            </td>
+                            <td>
+                                   
+                                    {{orders.price}}  
+    
+                                </td>
+                           
+                            <td>
+                                    {{orders.pub_date}}
+                            </td>
+                            <td>
+                                    {{orders.employee}}
+                            </td>
+                           
+                            <td>
+                            {% if orders.status == 'uncleared' %}
+                                <span class="label label-danger">{{orders.status}}</span>
+                
+                            {% elif orders.status == 'cleared' %}
+                                <span class="label label-success">{{orders.status}}</span>
+                            
+                            {% else %}
+                                <span class="label label-warning">{{orders.status}}</span>
+                            {% endif %}
+                            </td>
+                            <td class="text-center" >
+                                <div class="btn-group">
+                                    
+                                    {% if orders.status == 'uncleared' %}
+                                    <button type="button" data-val="{{orders.name}}" class="btn-white btn btn-xs" data-toggle="modal" data-target="#myModal5">
+                                        Clear
+                                </button>
+                                <button type="button" data-val="{{orders.name}}" class="btn-white btn btn-xs" data-toggle="modal" data-target="#myModal6">
+                                        Raise Flag
+                                </button>
+                           
+                            {% elif orders.status == 'cleared' %}
+                            <i class="fa fa-check-circle large" aria-hidden="true"></i>
+                            {% else %}
+                            <i class="fa fa-window-close large" aria-hidden="true"></i>
+                            {% endif %}
+                            
+                                    
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %} 
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="7">
+                                <ul class="pagination float-right"></ul>
+                            </td>
+                            
+                                        
+                                        
+                                    
+                                </tfoot>
+                        </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">Clear Order Receipt</h4>
+                        <small class="font-bold">Billing information</small>
+                    </div>
+                    <div class="modal-body">
+                        <span style="font-size: 200%;font-weight: bolder;"> Order Details</span>
+                        <table class="table table-striped table-bordered" style="font-size:120%;font-weight:bold;">
+                            <th>Order ID</th>
+                            <th>Total</th>
+                            <tr>
+                                <td class="receiptid"></td>
+                                <td  class="receipt"></td>
+                            </tr>
+                        </table>
+                   
+                
+                    <div class="row" style="text-align: center;">
+                      <form>
+                           
+                            <div class="input-group" id="cleared" style="margin-top: 20px;">
+                                
+                                <span style="margin:10px;"><h3>AMOUNT TENDERED:</h3></span> 
+                                    <input type="text" id="cash" autofocus oninput="subtract()" class="form-control" style="font-size: 200%;font-weight: bolder;width:20%">
+                                    
+                                        <span style="margin:10px;"><h3>CHANGE:</h3></span> <div class="input-group-append" id="change" style="font-size: 200%;font-weight: bolder;">
+                                            </div>
+                                    </div>
+                             
+                                    
+                                    
+                       </form>
+                       <img id="success" alt="image" class="rounded-circle" src="{% static 'oposapp/assets/img/success.gif'%}" width="140px" height="140px" />
+                    </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button id="clearb" onclick="clearer()" class="btn btn-white">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal inmodal fade" id="myModal6" tabindex="-1" role="dialog"  aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title">Raise Flag Order Receipt</h4>
+                            <small class="font-bold">Receipt information</small>
+                        </div>
+                        <div class="modal-body">
+                           <form>
+                                <div class="input-group m-b">
+                                    Reasons
+                                        <input type="text" id="flag" class="form-control" maxlength="40">
+                                        <div class="input-group-append">
+                                            <span class="input-group-addon">.00</span>
+                                            </div>
+                                        </div>
+                           </form>
+                        </div>
+    
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                            <button  type='submit' onclick="flag()" class="btn btn-white" >Submit</button>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</div>
+
+{% endblock content %}
+{% block scripts %}
+<script>
+    var myVal;
+    var total;
+    var x = document.getElementById('clearb');
+    var y = document.getElementById('success');
+     
+      $('#myModal5').on('show.bs.modal', function (event) {
+      myVal = $(event.relatedTarget).data('val');
+      $('#cash').trigger('focus');
+     
+      x.style.visibility = 'hidden';
+      y.style.visibility = 'hidden';
+ 
+
+      $.ajax({
+           url:"/oposapp/orderdetails",
+           type: "POST",
+           data: JSON.stringify({'val': myVal}),
+           dataType: 'text',
+           //data: {name: name, age: age},
+           success:function(response){
+               total=response;
+            $('.receiptid').html(myVal);   
+            $('.receipt').html(response);
+           console.log(response);
+           
+           },
+           complete:function(){},
+           error:function (xhr, textStatus, thrownError){
+            
+            $(this).find(".receipt").text("Could Not Get Order");
+       }
+       });
+
+     
+});
+$('#myModal5').on('hidden.bs.modal', function () {
+ location.reload(); 
+})
+
+$('#myModal6').on('show.bs.modal', function (event) {
+      myVal = $(event.relatedTarget).data('val');
+      $('#flag').trigger('focus');
+     
+});  
+$('#myModal6').on('hidden.bs.modal', function () {
+ location.reload(); 
+ 
+})  
+     
+
+
+      function clearer()
+      {
+        $.ajax({
+           url:"/oposapp/clear",
+           type: "POST",
+           data: JSON.stringify({'val': myVal}),
+           dataType: 'text',
+           //data: {name: name, age: age},
+           success:function(response){
+            $('#cleared').html('Cleared Successfully');
+           console.log(response);
+           y.style.visibility = 'visible';
+           
+           },
+           complete:function(){},
+           error:function (xhr, textStatus, thrownError){
+            console.log("Could Not Clear");
+       }
+       });
+        
+
+      }
+      function subtract()
+      {
+        var cash = document.getElementById('cash').value;
+        var change = cash - total;
+        document.getElementById("change").innerHTML=change;
+        if(change>=0)
+        {
+            x.style.visibility = 'visible';
+        }
+      }
+
+      function flag()
+      {
+        var flagz = document.getElementById('flag').value;
+        var data = {"val": myVal,"flag": flagz};
+        $.ajax({
+            
+           url:"/oposapp/flag",
+           type: "POST",
+           data: JSON.stringify(data),
+           dataType: 'text',
+           //data: {name: name, age: age},
+           success:function(response){
+         
+           console.log(response);
+           
+           },
+           complete:function(){},
+           error:function (xhr, textStatus, thrownError){
+            console.log("Could Not Submit Order");
+       }
+       });
+        
+
+      }
+        </script>
+        <script>
+                $(document).ready(function () {
+                   logincash();
+                   
+       
+                       });
+                
+               </script>
+        <script>
+                 function logincash()
+            {
+                swal({
+  title: "PLEASE ENTER PIN!",
+  text: "You Must Enter PIN before you make an order",
+  type: "input",
+  inputType: "password",
+  showCancelButton: false,
+  closeOnConfirm: false,
+  animation: "slide-from-top",
+  inputPlaceholder: "ENTER PIN",
+  allowEscapeKey : false,
+  allowOutsideClick: false
+},
+function(inputValue){
+  if (inputValue === false) return false;
+
+  if (inputValue === "") {
+    swal.showInputError("ERROR!!EMPTY PIN!");
+    return false
+  }
+  var result=inputValue;
+  $.ajax({
+           url:"/oposapp/pincash",
+           type: "POST",
+           data: JSON.stringify(result),
+           dataType: 'text',
+           success:function(response){
+           
+            var responsez = JSON.parse(response);
+           
+            if(responsez.length === 0)
+            {
+            swal.showInputError("ERROR!!WRONG PIN!");
+            return false; 
+            }
+            else{
+            var name;
+            $.each(responsez, function(index, valuez){
+            
+            window.employee =  valuez.pk;
+            name = valuez.fields.username;
+            title = valuez.fields.empl;  
+        
+           
+         }); 
+            swal("WELCOME "+name, "You are logged in successfully.Proceed", "success");
+            }
+            document.getElementById("user").innerHTML = name;
+            document.getElementById("title").innerHTML = title;
+            document.getElementById("priv").innerHTML = "-";
+          
+             
+           },
+           complete:function(){},
+           error:function (xhr, textStatus, thrownError){
+            ("Could Not Submit Order");
+            swal.showInputError("ERROR!!WRONG PIN!");
+            return false
+       }
+       });
+  //swal("SUCCESS!", "Your PIN IS: " + inputValue, "success");
+ 
+});
+            }
+                
+               </script>
+        
+{% endblock scripts %}
+
+
+
+
+
+    <!-- Page-Level Scripts -->
+   
+    

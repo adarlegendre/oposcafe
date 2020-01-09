@@ -1,0 +1,716 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>OSPOS</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <link href="{% static 'oposapp/assets/css/plugins/dataTables/datatables.min.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/css/plugins/sweetalert/sweetalert.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/print.min.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/css/plugins/footable/footable.core.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/css/plugins/datapicker/datepicker3.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/css/plugins/slick/slick.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/css/plugins/slick/slick-theme.css' %}" rel="stylesheet">
+
+<body>
+
+<div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <img alt="image" class="rounded-circle" src="{% static 'oposapp/assets/img/profile_small.png'%}" width="40px" height="40px" />
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="block m-t-xs font-bold" id="user">User</span>
+                            <span class="text-muted text-xs block" id="title">System <b class="caret"></b></span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
+                            <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="login">Logout</a></li>
+                            
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        Opos
+                    </div>
+                    
+                </li>
+                <li>
+                    <a href="index"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span> </a>
+                    
+                </li>
+                
+                <li>
+                        <a href="orders"><i class="fa fa-th-large"></i> <span class="nav-label">Orders</span> </a>
+                        
+                    </li>
+                    <div id="priv" hidden>
+                    <li>
+                        <a href="supplies"><i class="fa fa-th-large"></i> <span class="nav-label">Customers</span> </a>
+                        
+                    </li>
+                    <li>
+                        <a href="supplies"><i class="fa fa-th-large"></i> <span class="nav-label">Petty Cash</span> </a>
+                        
+                    </li>
+                    <li>
+                        <a href="suppliers"><i class="fa fa-th-large"></i> <span class="nav-label">Payroll</span> </a>
+                        
+                    </li>
+                    <li>
+                        <a href="stocks"><i class="fa fa-th-large"></i> <span class="nav-label">Stock</span> </a>
+                        
+                    </li>
+                    <li>
+                            <a href="supplies"><i class="fa fa-th-large"></i> <span class="nav-label">Supplies</span> </a>
+                            
+                        </li>
+                        <li>
+                                <a href="suppliers"><i class="fa fa-th-large"></i> <span class="nav-label">Suppliers</span> </a>
+                                
+                            </li>
+
+                <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Reports </span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                                <li><a href="metrics">Metrics</a></li>
+                            <li>
+                                <a href="reports">All Reports<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="#">Profits</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Losses</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Net Sales</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Employees</a>
+                                    </li>
+    
+                                </ul>
+                            </li>
+                            <li><a href="#">Stocks</a></li>
+                            <li>
+                                <a href="#">Employee Performance</a></li>
+                            <li>
+                                <a href="#">Best Selling</a></li>
+                                <li>
+                                        <a href="#">Poor Selling</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="supplies"><i class="fa fa-th-large"></i> <span class="nav-label">Settings</span> </a>
+                        
+                    </li>
+                </div>
+            </ul>
+
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                    <form role="search" class="navbar-form-custom" action="search_results.html">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search for dish..." class="form-control" name="top-search" id="top-search">
+                        </div>
+                    </form>
+                   
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                      
+                    <li>
+                           
+                        <span class="m-r-sm text-muted welcome-message">{{info}}</span>
+                    
+                    
+                    </li>
+                    <li>
+                           
+                        <a  href="login"><span class="m-r-sm text-muted welcome-message">Admin</span></a>
+                    
+                  
+                    </li>
+                    <li>
+                           
+                        <a  href="login"><span class="m-r-sm text-muted welcome-message">Supervisor</span></a>
+                    
+                    
+                    </li>
+                   
+
+
+                    <li>
+                        <a href="login">
+                            <i class="fa fa-sign-out"></i> Log out
+                        </a>
+                    </li>
+            
+                </ul>
+
+            </nav>
+        </div>
+       
+      
+            {% block content %}
+            {% endblock content %}
+       
+<div class="footer">
+        <div class="float-right">
+             <strong>O</strong>pos
+        </div>
+        <div>
+               
+            <strong>Copyright</strong> Powered by <a href="https://techcrum.com">Techcrum</a> &copy; 2019
+        </div>
+    </div>
+
+</div>
+</div>
+
+{% block scripts %}
+{% endblock scripts %}
+
+
+<!-- Mainly scripts -->
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="{% static 'oposapp/assets/js/popper.min.js' %}"></script>
+<script src="{% static 'oposapp/assets/print.min.js' %}"></script>
+<script src="{% static 'oposapp/assets/js/bootstrap.js' %}"></script>
+<script src="{% static 'oposapp/assets/js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
+<script src="{% static 'oposapp/assets/js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+<!-- Custom and plugin javascript -->
+<script src="{% static 'oposapp/assets/js/inspinia.js' %}"></script>
+<script src="{% static 'oposapp/assets/js/plugins/pace/pace.min.js' %}"></script>
+<script src="{% static 'oposapp/assets/js/plugins/toastr/toastr.min.js' %}"></script>
+<script src="{% static 'oposapp/assets/js/jquery.mycart.js' %}"></script>
+<script src="{% static 'oposapp/assets/js/bootstrap.min.js' %}"></script>
+ <!-- FooTable -->
+ <script src="{% static 'oposapp/assets/js/plugins/footable/footable.all.min.js' %}"></script>
+ <script src="{% static 'oposapp/assets/js/plugins/datapicker/bootstrap-datepicker.js' %}"></script>
+
+ <script src="{% static 'oposapp/assets/js/zip.js' %}"></script>
+ <script src="{% static 'oposapp/assets/js/zip-ext.js' %}"></script>
+ <script src="{% static 'oposapp/assets/js/deflate.js' %}"></script>
+ <script src="{% static 'oposapp/assets/js/JSPrintManager.js' %}"></script>
+ <script src="{% static 'oposapp/assets/js/plugins/sweetalert/sweetalert.min.js' %}"></script>
+ <script src="{% static 'oposapp/assets/js/inspinia.js' %}"></script>
+ <script src="{% static 'oposapp/assets/js/plugins/pace/pace.min.js' %}"></script>
+ 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/w/dt/dt-1.10.18/datatables.min.css"/>
+
+<script type="text/javascript" src="https://cdn.datatables.net/w/dt/dt-1.10.18/datatables.min.js"></script>
+
+
+
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+ <script type="text/javascript">
+    var jquery_2_2_3= $.noConflict(true);
+    </script>
+   
+
+ <!-- Page-Level Scripts -->
+ <script src="{% static 'oposapp/assets/js/plugins/slick/slick.min.js' %}"></script>
+
+    <!-- Additional style only for demo purpose -->
+    <style>
+        .slick_demo_2 .ibox-content {
+            margin: 0 10px;
+        }
+    </style>
+
+    <script>
+       
+        $(document).ready(function(){
+
+
+            $('.slick_demo_1').slick({
+                dots: true
+            });
+
+            $('.slick_demo_2').slick({
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                centerMode: true,
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 3,
+                            slidesToScroll: 3,
+                            infinite: true,
+                            dots: true
+                        }
+                    },
+                    {
+                        breakpoint: 600,
+                        settings: {
+                            slidesToShow: 2,
+                            slidesToScroll: 2
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+                ]
+            });
+
+            $('.slick_demo_3').slick({
+                infinite: true,
+                speed: 500,
+                fade: true,
+                cssEase: 'linear',
+                adaptiveHeight: true
+            });
+        });
+
+    </script>
+ <script>
+     $(document).ready(function() {
+
+         $('.footable').footable();
+
+         $('#date_added').datepicker({
+             todayBtn: "linked",
+             keyboardNavigation: false,
+             forceParse: false,
+             calendarWeeks: true,
+             autoclose: true
+         });
+
+         $('#date_modified').datepicker({
+             todayBtn: "linked",
+             keyboardNavigation: false,
+             forceParse: false,
+             calendarWeeks: true,
+             autoclose: true
+         });
+
+     });
+
+ </script>
+
+
+</body>
+
+</html>
+
+<script type="text/javascript">
+
+    $(function () {
+        
+      var goToCartIcon = function($addTocartBtn){
+        var $cartIcon = $(".my-cart-icon");
+        var $image = $('<img width="269px" height="202px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999","border-radius":"100px"});
+        $addTocartBtn.prepend($image);
+        var position = $cartIcon.position();
+        $image.animate({
+          top: position.top,
+          left: position.left
+        }, 800 , "linear", function() {
+          $image.remove();
+        });
+      }
+  
+      $('.my-cart-btn').myCart({
+        currencySymbol: 'Kshs',
+        classCartIcon: 'my-cart-icon',
+        classCartBadge: 'my-cart-badge',
+        classProductQuantity: 'my-product-quantity',
+        classProductRemove: 'my-product-remove',
+        classCheckoutCart: 'my-cart-checkout',
+        affixCartIcon: true,
+        showCheckoutModal: true,
+        numberOfDecimals: 2,
+        cartItems: [
+        ],
+        clickOnAddToCart: function($addTocart){
+          goToCartIcon($addTocart);
+        },
+        afterAddOnCart: function(products, totalPrice, totalQuantity) {
+          console.log("afterAddOnCart", products, totalPrice, totalQuantity);
+        },
+        clickOnCartIcon: function($cartIcon, products, totalPrice, totalQuantity) {
+          console.log("Receipt icon clicked", $cartIcon, products, totalPrice, totalQuantity);
+        },
+        checkoutCart: function(products, totalPrice, totalQuantity) {
+          var checkoutString = "Total Price: " + totalPrice + "\nTotal Quantity: " + totalQuantity;
+          var order_details = "";
+          var kitchen_order;
+          var random_num = new Date().getTime();
+          var cashiers_receipt;
+          var result = {"business":[]};
+          var count=1;
+          var esc = '\x1B'; //ESC byte in hex notation
+          var gs = '\x1D';
+          var newLine = '\x0A'; //LF byte in hex notation
+          var cmds = esc + "@"; //Initializes the printer (ESC @)
+          var dd = new Date();
+          var d =dd.getHours()+':'+dd.getMinutes()+'Hrs'+' '+dd.getDate()+'-'+dd.getMonth()+'-'+dd.getFullYear();
+          cmds +='------------Customer Order/Bill-----------------';
+          cmds += newLine;
+          cmds += esc + '!' + '\x00'; //Emphasized + Double-height + Double-width mode selected (ESC ! (8 + 16 + 32)) 56 dec => 38 hex
+          cmds += '         COME AND DINE RESTAURANT'; //text to print
+          cmds += newLine;
+          cmds += '            PO BOX 57933-OO200';
+          cmds += newLine;
+          cmds += '              NAIROBI,KENYA.';
+          cmds += newLine;
+          cmds += esc + '!' + '\x00';
+          cmds += '          RECEIPT NO:'+random_num;
+          cmds += newLine;
+          cmds += '            '+d;
+          cmds += newLine;
+          cmds +='________________________________________________';
+          cmds +='Item                       @       Qty    Amount';
+          cmds +='________________________________________________';
+          cmds += newLine;
+
+          checkoutString += "\n\n id \t name \t summary \t price \t quantity \t image path";
+          var checkout_json = {};
+          $.each(products, function(){
+            var sub_total=0;
+            checkoutString += ("\n " + this.id + " \t " + this.name + " \t " + this.summary + " \t " + this.price + " \t " + this.quantity + " \t " + this.image);
+            //checkout_json[count] += {'order_id' : this.id,'quantity' : this.quantity};
+            checkout_json = {
+                "order_content": 
+                    {
+                        "name": random_num,
+                        "dish": this.name,
+                        "id": this.id,
+                        "cost": this.price,
+                        "quantity":  this.quantity,
+                        "employee":window.employee
+                    }
+                
+            };
+            
+            var food = this.name;
+            var unitprice = this.price;
+            var amount = this.quantity;
+            var subt = this.quantity*this.price;
+
+            console.log(food);
+            var foodlength= 25;
+            var unitpricelength = 10;
+            var amountlength = 7;
+            var subtlength = 10;
+            var i;
+
+           
+
+
+            for(i=food.length;i<foodlength;i++)
+            {
+                food+='_';
+            }
+            for(i=unitprice.length;i<unitpricelength;i++)
+            {
+                unitprice+='_';
+            }
+            for(i=amount.length;i<amountlength;i++)
+            {
+                amount+='_';
+            }
+            for(i=subt.length;i<subtlength;i++)
+            {
+                subt+='_';
+            }
+            console.log(food);
+            console.log(food.length);
+
+
+            sub_total=this.quantity*this.price;
+            //cmds += this.name +'@'+this.price; 
+            //cmds += '     '+this.quantity;
+            //cmds += '     '+sub_total;
+            cmds += food + unitprice + amount + subt;
+            cmds += newLine; 
+            kitchen_order += this.name +'   '+this.quantity ; 
+            kitchen_order += newLine;
+            cashiers_receipt += this.name +'   '+this.quantity  + '   '+sub_total; 
+            cashiers_receipt += newLine;
+            result.business.push(checkout_json);  // ADDING EACH OBJECT TO YOUR ARRAY
+            order_details   += ("\n\n " + count + ". " + this.name  + "-" + this.quantity + "-" + this.price);  
+            count++;
+
+        });
+                cashiers_receipt += newLine ;
+                cashiers_receipt  += 'TOTAL                        '+totalPrice;
+                cmds += newLine ;
+                cmds +='________________________________________________';
+                cmds += newLine;
+                cmds += 'TOTAL                                  '+totalPrice;
+                cmds += newLine;
+                cmds += newLine;
+                cmds += '            Thank You.Welcome Again';
+                cmds += newLine;
+                cmds += '            Powered by techcrum.com';
+                cmds += newLine;
+                cmds += newLine;
+                cmds += newLine;
+                cmds += newLine;
+                cmds += newLine;
+                cmds += newLine;
+                cmds += esc + "m";
+               // cmds +='---------------Kitchen Order------------------';
+               // cmds += newLine;
+               // cmds += 'Receipt No:'+random_num;
+               // cmds += newLine;
+               // cmds += kitchen_order;
+               // cmds += newLine;
+               // cmds += d;
+               // cmds += newLine;
+               // cmds += newLine;
+                //cmds += newLine;
+                //cmds += newLine;
+                //cmds += newLine;
+                //cmds += newLine;
+               // cmds += esc + "m";
+               // cmds +='---------------Cashier Bill------------------';
+               // cmds += newLine;
+               // cmds += 'Receipt No:'+random_num;
+               // cmds += newLine;
+               // cmds += cashiers_receipt;
+               // cmds += newLine;
+                //cmds += d;
+                //cmds += newLine;
+                //cmds += newLine;
+               // cmds += newLine;
+               // cmds += newLine;
+               // cmds += newLine;
+               // cmds += esc + "m";
+                //cmds += gs + "V";
+            order_details += ("\nTotal Price: " + totalPrice + ".00" );
+            order_details += ("\n\nThank you!Welcome Again");
+            order_details += ("\nYou were served by:Admin");
+            
+          //alert(checkoutString);
+          //+ "\nTotal Quantity: " + totalQuantity
+          $.ajax({
+           url:"/oposapp/order",
+           type: "POST",
+           data: JSON.stringify(result),
+           dataType: 'text',
+           //data: {name: name, age: age},
+           success:function(response){
+         
+           
+          printed(cmds);  
+           },
+           complete:function(){},
+           error:function (xhr, textStatus, thrownError){
+            ("Could Not Submit Order");
+       }
+       });
+          //console.log("checking out", products, totalPrice, totalQuantity);
+        },
+        getDiscountPrice: function(products, totalPrice, totalQuantity) {
+         // console.log("calculating discount", products, totalPrice, totalQuantity);
+          return totalPrice ;
+        }
+      });
+    });
+    </script>
+     
+     <script>
+        $(document).ready(function() {
+        $('.orders').DataTable( {
+            "footerCallback": function ( row, data, start, end, display ) {
+                var api = this.api(), data;
+     
+                // Remove the formatting to get integer data for summation
+                var intVal = function ( i ) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '')*1 :
+                        typeof i === 'number' ?
+                            i : 0;
+                };
+     
+                // Total over all pages
+                total = api
+                    .column( 2 )
+                    .data()
+                    .reduce( function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0 );
+     
+                // Total over this page
+                pageTotal = api
+                    .column( 2, { page: 'current'} )
+                    .data()
+                    .reduce( function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0 );
+     
+                // Update footer
+                $( api.column( 2 ).footer() ).html(
+                    'kshs'+pageTotal +' ( Kshs'+ total +' total)'
+                );
+            }
+        } );
+    } );
+        </script>
+
+<script>
+ 
+        //WebSocket settings
+        JSPM.JSPrintManager.auto_reconnect = true;
+        JSPM.JSPrintManager.start();
+        JSPM.JSPrintManager.WS.onStatusChanged = function () {
+            if (jspmWSStatus()) {
+                //get client installed printers
+                JSPM.JSPrintManager.getPrinters().then(function (myPrinters) {
+                    var options = '';
+                    for (var i = 0; i < myPrinters.length; i++) {
+                        options += '<option>' + myPrinters[i] + '</option>';
+                    }
+                    $('#installedPrinterName').html(options);
+                });
+            }
+        };
+     
+        //Check JSPM WebSocket status
+        function jspmWSStatus() {
+            if (JSPM.JSPrintManager.websocket_status == JSPM.WSStatus.Open)
+                return true;
+            else if (JSPM.JSPrintManager.websocket_status == JSPM.WSStatus.Closed) {
+                console.log('JSPrintManager (JSPM) is not installed or not running! Download JSPM Client App from https://neodynamic.com/downloads/jspm');
+                return false;
+                console.log('JSPM has blacklisted this website!');
+                return false;
+            }
+        }
+     
+        //Do printing...
+        function printed(cmds) {
+            if (jspmWSStatus()) {
+                //Create a ClientPrintJob
+                var cpj = new JSPM.ClientPrintJob();
+                //Set Printer type (Refer to the help, there many of them!)
+                
+                    cpj.clientPrinter = new JSPM.DefaultPrinter();
+              
+                //Set content to print...
+                //Create ESP/POS commands for sample label
+                
+     
+                cpj.printerCommands = cmds;
+                //Send print job to printer!
+                cpj.sendToClient();
+
+                var cpjn = new JSPM.ClientPrintJob();
+                cpjn.clientPrinter = new JSPM.NetworkPrinter(9100,"192.168.1.87");
+                cpjn.printerCommands = cmds;
+                cpjn.sendToClient();
+
+
+            }
+            login();
+        }
+     
+    </script>
+    <script>
+         $(document).ready(function () {
+            login();
+            
+
+                });
+         
+        </script>
+        <script>
+            function login()
+            {
+                swal({
+  title: "PLEASE ENTER PIN!",
+  text: "You Must Enter PIN before you make an order",
+  type: "input",
+  inputType: "password",
+  showCancelButton: false,
+  closeOnConfirm: false,
+  animation: "slide-from-top",
+  inputPlaceholder: "ENTER PIN",
+  allowEscapeKey : false,
+  allowOutsideClick: false
+},
+function(inputValue){
+  if (inputValue === false) return false;
+
+  if (inputValue === "") {
+    swal.showInputError("ERROR!!EMPTY PIN!");
+    return false
+  }
+  var result=inputValue;
+  $.ajax({
+           url:"/oposapp/pin",
+           type: "POST",
+           data: JSON.stringify(result),
+           dataType: 'text',
+           success:function(response){
+           
+            var responsez = JSON.parse(response);
+           
+            if(responsez.length === 0)
+            {
+            swal.showInputError("ERROR!!WRONG PIN!");
+            return false; 
+            }
+            else{
+            var name;
+            $.each(responsez, function(index, valuez){
+            
+            window.employee =  valuez.pk;
+            name = valuez.fields.username; 
+            title ='Cashier'; 
+        
+           
+         }); 
+            swal("WELCOME "+name, "You are logged in successfully.Proceed", "success");
+            }
+            document.getElementById("user").innerHTML = name;
+            document.getElementById("title").innerHTML = title;
+            document.getElementById("priv").innerHTML = "-";
+          
+             
+           },
+           complete:function(){},
+           error:function (xhr, textStatus, thrownError){
+            ("Could Not Submit Order");
+            swal.showInputError("ERROR!!WRONG PIN!");
+            return false
+       }
+       });
+  //swal("SUCCESS!", "Your PIN IS: " + inputValue, "success");
+ 
+});
+            }
+            </script>
+

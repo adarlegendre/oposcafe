@@ -1,0 +1,348 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>OSPOS</title>
+    <link href="{% static 'oposapp/assets/css/plugins/dataTables/datatables.min.css' %}" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script src="https://unpkg.com/jspdf-autotable@3.2.5/dist/jspdf.plugin.autotable.js"></script>
+    <link href="{% static 'oposapp/assets/css/plugins/sweetalert/sweetalert.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/print.min.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/css/plugins/slick/slick.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/css/plugins/slick/slick-theme.css' %}" rel="stylesheet">
+    <link href="{% static 'oposapp/assets/css/plugins/daterangepicker/daterangepicker-bs3.css' %}" rel="stylesheet">
+<body>
+
+<div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <img alt="image" class="rounded-circle" src="{% static 'oposapp/assets/img/profile_small.png'%}" width="40px" height="40px" />
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="block m-t-xs font-bold" id="user">User</span>
+                                <span class="text-muted text-xs block" id="title">System <b class="caret"></b></span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
+                            <li><a class="dropdown-item" href="mailbox.html">Mailbox</a></li>
+                            <li class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="login">Logout</a></li>
+                            
+                        </ul>
+                    </div>
+                    <div class="logo-element">
+                        Opos
+                    </div>
+                </li>
+                <li>
+                    <a href="index"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span> </a>
+                    
+                </li>
+                <li>
+                        <a href="orders"><i class="fa fa-th-large"></i> <span class="nav-label">Orders</span> </a>
+                        
+                    </li>
+                    
+                    <li>
+                        <a href="customers"><i class="fa fa-th-large"></i> <span class="nav-label">Customers</span> </a>
+                        
+                    </li>
+                    <li>
+                        <a href="customers"><i class="fa fa-th-large"></i> <span class="nav-label">Floor Plan</span> </a>
+                        
+                    </li>
+
+                    <li>
+                        <a href="supplies"><i class="fa fa-th-large"></i> <span class="nav-label">Petty Cash</span> </a>
+                        
+                    </li>
+                    <div id="priv" hidden>
+                    <li>
+                        <a href="suppliers"><i class="fa fa-th-large"></i> <span class="nav-label">Payroll</span> </a>
+                        
+                    </li>
+
+                    <li>
+                        <a href="stocks"><i class="fa fa-th-large"></i> <span class="nav-label">Stock</span> </a>
+                        
+                    </li>
+                    <li>
+                            <a href="supplies"><i class="fa fa-th-large"></i> <span class="nav-label">Supplies</span> </a>
+                            
+                        </li>
+                        <li>
+                                <a href="suppliers"><i class="fa fa-th-large"></i> <span class="nav-label">Suppliers</span> </a>
+                                
+                            </li>
+                            <li>
+                                <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Dishes </span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level collapse">
+                                        <li><a href="reports">Menu</a></li>
+                                    <li>
+                                        <a href="reports">Recipes <span class="fa arrow"></span></a>
+                                        
+                                    </li>
+                                    <li><a href="#">Costing</a></li>
+                                    
+                                </ul>
+                            </li>
+
+                <li>
+                        <a href="#"><i class="fa fa-sitemap"></i> <span class="nav-label">Reports </span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                                <li><a href="metrics">Metrics</a></li>
+                            <li>
+                                <a href="reports">All Reports<span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li>
+                                        <a href="#">Profits</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Losses</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Net Sales</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Employees</a>
+                                    </li>
+    
+                                </ul>
+                            </li>
+                            <li><a href="#">Stocks</a></li>
+                            <li>
+                                <a href="#">Employee Performance</a></li>
+                            <li>
+                                <a href="#">Best Selling</a></li>
+                                <li>
+                                        <a href="#">Poor Selling</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="supplies"><i class="fa fa-th-large"></i> <span class="nav-label">Shifts</span> </a>
+                        
+                    </li> 
+                    <li>
+                        <a href="supplies"><i class="fa fa-th-large"></i> <span class="nav-label">Settings</span> </a>
+                        
+                    </li> 
+                </div>
+                
+            </ul>
+
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                    <form role="search" class="navbar-form-custom" action="search_results.html">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search for meal..." class="form-control" name="top-search" id="top-search">
+                        </div>
+                    </form>
+                   
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                      
+                    <li>
+                           
+                        <span class="m-r-sm text-muted welcome-message">Welcome to Opos</span>
+                    
+                    {{info}}
+                    </li>
+                    
+                   
+
+
+                    <li>
+                        <a href="login">
+                            <i class="fa fa-sign-out"></i> Log out
+                        </a>
+                    </li>
+            
+                </ul>
+
+            </nav>
+        </div>
+        <div class="row wrapper border-bottom white-bg page-heading" id='testprint'>
+            <div class="col-lg-10">
+                <h2>Restaurant Meals </h2>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/oposapp">Home</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a>Restaurant</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <strong>Meals grid</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+              
+            </div>
+        
+        </div>
+      
+            {% block content %}
+            {% endblock content %}
+       
+<div class="footer">
+        <div class="float-right">
+             <strong>O</strong>poscafe
+        </div>
+        <div>
+               
+            <strong>Copyright</strong> Powered by <a href="https://techcrum.com">Techcrum</a> &copy; 2019
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+
+
+<!-- Mainly scripts -->
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+src="https://code.jquery.com/jquery-3.4.1.min.js"
+integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+crossorigin="anonymous"></script>
+
+
+<script src="{% static 'oposapp/assets/js/popper.min.js' %}"></script>
+<script src="{% static 'oposapp/assets/print.min.js' %}"></script>
+<script src="{% static 'oposapp/assets/js/bootstrap.js' %}"></script>
+<script src="{% static 'oposapp/assets/js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
+<script src="{% static 'oposapp/assets/js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+<!-- Custom and plugin javascript -->
+<script src="{% static 'oposapp/assets/js/inspinia.js' %}"></script>
+<script src="{% static 'oposapp/assets/js/plugins/pace/pace.min.js' %}"></script>
+<script src="{% static 'oposapp/assets/js/plugins/toastr/toastr.min.js' %}"></script>
+<script src="{% static 'oposapp/assets/js/jquery.mycart.js' %}"></script>
+<script src="{% static 'oposapp/assets/js/bootstrap.min.js' %}"></script>
+ <!-- FooTable -->
+ <script src="{% static 'oposapp/assets/js/plugins/footable/footable.all.min.js' %}"></script>
+ <script src="{% static 'oposapp/assets/js/plugins/datapicker/bootstrap-datepicker.js' %}"></script>
+
+ <script src="{% static 'oposapp/assets/js/zip.js' %}"></script>
+ <script src="{% static 'oposapp/assets/js/zip-ext.js' %}"></script>
+ <script src="{% static 'oposapp/assets/js/deflate.js' %}"></script>
+ <script src="{% static 'oposapp/assets/js/JSPrintManager.js' %}"></script>
+<!-- Date range use moment.js same as full calendar plugin -->
+<script src="{% static 'oposapp/assets/js/plugins/fullcalendar/moment.min.js' %}"></script>
+
+<!-- Date range picker -->
+<script src="{% static 'oposapp/assets/js/plugins/daterangepicker/daterangepicker.js' %}"></script>
+
+
+
+<script src="{% static 'oposapp/assets/js/plugins/sweetalert/sweetalert.min.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css"/>
+<script type="text/javascript" src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/w/dt/dt-1.10.18/datatables.min.css"/>
+
+<script type="text/javascript" src="https://cdn.datatables.net/w/dt/dt-1.10.18/datatables.min.js"></script>
+
+   
+
+ <!-- Page-Level Scripts -->
+ 
+
+
+</body>
+
+</html>
+{% block scripts %}
+{% endblock scripts %}
+
+     
+     <script>
+        $(document).ready(function() {
+        $('.orders').DataTable( {
+        'lengthMenu': [ [5,10,25,50,100, 250, -1], [5,10,25,50,100, 250, 'All'] ],
+        'pageLength': 10 , 
+        'buttons': [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+            "footerCallback": function ( row, data, start, end, display ) {
+                var api = this.api(), data;
+     
+                // Remove the formatting to get integer data for summation
+                var intVal = function ( i ) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\$,]/g, '')*1 :
+                        typeof i === 'number' ?
+                            i : 0;
+                };
+     
+                // Total over all pages
+                total = api
+                    .column( 3 )
+                    .data()
+                    .reduce( function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0 );
+     
+                // Total over this page
+                pageTotal = api
+                    .column( 3, { page: 'current'} )
+                    .data()
+                    .reduce( function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0 );
+     
+                // Update footer
+                $( api.column( 3 ).footer() ).html(
+                    'kshs'+pageTotal +' ( Kshs'+ total +' total)'
+                );
+            }
+        } );
+    } );
+        </script>
+        <script>
+            function print_sales()
+            {
+                var today = new Date();
+
+                var doc = new jsPDF();
+                doc.text(40, 10, 'COME AND DINE SALES REPORT ON '+ today.getDate()+'/'+ today.getMonth()+'/'+today.getFullYear());
+    // It can parse html:
+     doc.autoTable({html: '#orders'});
+    
+    // Or use javascript directly:
+    //doc.autoTable({
+    //    head: [['No', 'Order', 'Description', 'Cost','Status']],
+    //    body: [
+    //       display
+            // ...
+     //   ]
+    //});
+    
+    doc.save('SalesON.pdf');
+            }
+            </script>
+
+

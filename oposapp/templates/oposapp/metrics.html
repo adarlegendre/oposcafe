@@ -1,0 +1,1089 @@
+
+
+{% extends "oposapp/base.html" %}
+{% block content%}
+{% load staticfiles %}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Sales</h5>
+                    <div class="float-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-xs btn-white active">Today</button>
+                            <button type="button" class="btn btn-xs btn-white">Monthly</button>
+                            <button type="button" class="btn btn-xs btn-white">Annual</button>
+                            <button type="button" class="btn btn-xs btn-white">Print</button>
+                            <button type="button" class="btn btn-xs btn-white">Select DATE</button>
+                            <input class="form-control" type="text" name="daterange" value="01/01/2019 - 12/31/2019" onchange="dataload()" />
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                    <div class="col-lg-9">
+                        <div id="chartdiv2"></div>
+                    </div>
+                    <div class="col-lg-3">
+                        <ul class="stat-list">
+                            <li>
+                                <h2 class="no-margins">2,346</h2>
+                                <small>Total orders in period</small>
+                                <div class="stat-percent">48% <i class="fa fa-level-up text-navy"></i></div>
+                                <div class="progress progress-mini">
+                                    <div style="width: 48%;" class="progress-bar"></div>
+                                </div>
+                            </li>
+                            <li>
+                                <h2 class="no-margins ">4,422</h2>
+                                <small>Orders in last month</small>
+                                <div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i></div>
+                                <div class="progress progress-mini">
+                                    <div style="width: 60%;" class="progress-bar"></div>
+                                </div>
+                            </li>
+                            <li>
+                                <h2 class="no-margins ">9,180</h2>
+                                <small>Monthly income from orders</small>
+                                <div class="stat-percent">22% <i class="fa fa-bolt text-navy"></i></div>
+                                <div class="progress progress-mini">
+                                    <div style="width: 22%;" class="progress-bar"></div>
+                                </div>
+                            </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5>Dishes</h5>
+                        <div class="float-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-xs btn-white active">Today</button>
+                                <button type="button" class="btn btn-xs btn-white">Monthly</button>
+                                <button type="button" class="btn btn-xs btn-white">Annual</button>
+                                <button type="button" class="btn btn-xs btn-white">Print</button>
+                                <button type="button" class="btn btn-xs btn-white">Select DATE</button>
+                                <input class="form-control" type="text" name="daterange" value="01/01/2019 - 12/31/2019" onchange="dataload()" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                        <div class="col-lg-9">
+                            <div id="chartdiv"></div>
+                        </div>
+                        <div class="col-lg-3">
+                            <ul class="stat-list">
+                                <li>
+                                    <h2 class="no-margins">2,346</h2>
+                                    <small>Total orders in period</small>
+                                    <div class="stat-percent">48% <i class="fa fa-level-up text-navy"></i></div>
+                                    <div class="progress progress-mini">
+                                        <div style="width: 48%;" class="progress-bar"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h2 class="no-margins ">4,422</h2>
+                                    <small>Orders in last month</small>
+                                    <div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i></div>
+                                    <div class="progress progress-mini">
+                                        <div style="width: 60%;" class="progress-bar"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <h2 class="no-margins ">9,180</h2>
+                                    <small>Monthly income from orders</small>
+                                    <div class="stat-percent">22% <i class="fa fa-bolt text-navy"></i></div>
+                                    <div class="progress progress-mini">
+                                        <div style="width: 22%;" class="progress-bar"></div>
+                                    </div>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <h5>Performance</h5>
+                            <div class="float-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-xs btn-white active">Today</button>
+                                    <button type="button" class="btn btn-xs btn-white">Monthly</button>
+                                    <button type="button" class="btn btn-xs btn-white">Annual</button>
+                                    <button type="button" class="btn btn-xs btn-white">Print</button>
+                                    <button type="button" class="btn btn-xs btn-white">Select DATE</button>
+                                    <input class="form-control" type="text" name="daterange" value="01/01/2019 - 12/31/2019" onchange="dataload()" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row">
+                            <div class="col-lg-9">
+                                <div id="chartdiv3"></div>
+                            </div>
+                            <div class="col-lg-3">
+                                <ul class="stat-list">
+                                    <li>
+                                        <h2 class="no-margins">2,346</h2>
+                                        <small>Total orders in period</small>
+                                        <div class="stat-percent">48% <i class="fa fa-level-up text-navy"></i></div>
+                                        <div class="progress progress-mini">
+                                            <div style="width: 48%;" class="progress-bar"></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <h2 class="no-margins ">4,422</h2>
+                                        <small>Orders in last month</small>
+                                        <div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i></div>
+                                        <div class="progress progress-mini">
+                                            <div style="width: 60%;" class="progress-bar"></div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <h2 class="no-margins ">9,180</h2>
+                                        <small>Monthly income from orders</small>
+                                        <div class="stat-percent">22% <i class="fa fa-bolt text-navy"></i></div>
+                                        <div class="progress progress-mini">
+                                            <div style="width: 22%;" class="progress-bar"></div>
+                                        </div>
+                                    </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </div>
+        
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox ">
+                            <div class="ibox-title">
+                                <h5>Tables</h5>
+                                <div class="float-right">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-xs btn-white active">Today</button>
+                                        <button type="button" class="btn btn-xs btn-white">Monthly</button>
+                                        <button type="button" class="btn btn-xs btn-white">Annual</button>
+                                        <button type="button" class="btn btn-xs btn-white">Print</button>
+                                        <button type="button" class="btn btn-xs btn-white">Select DATE</button>
+                                        <input class="form-control" type="text" name="daterange" value="01/01/2019 - 12/31/2019" onchange="dataload()" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                                <div class="row">
+                                <div class="col-lg-9">
+                                    <div id="chartdiv4"></div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <ul class="stat-list">
+                                        <li>
+                                            <h2 class="no-margins">2,346</h2>
+                                            <small>Total orders in period</small>
+                                            <div class="stat-percent">48% <i class="fa fa-level-up text-navy"></i></div>
+                                            <div class="progress progress-mini">
+                                                <div style="width: 48%;" class="progress-bar"></div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <h2 class="no-margins ">4,422</h2>
+                                            <small>Orders in last month</small>
+                                            <div class="stat-percent">60% <i class="fa fa-level-down text-navy"></i></div>
+                                            <div class="progress progress-mini">
+                                                <div style="width: 60%;" class="progress-bar"></div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <h2 class="no-margins ">9,180</h2>
+                                            <small>Monthly income from orders</small>
+                                            <div class="stat-percent">22% <i class="fa fa-bolt text-navy"></i></div>
+                                            <div class="progress progress-mini">
+                                                <div style="width: 22%;" class="progress-bar"></div>
+                                            </div>
+                                        </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                </div>
+            
+                            </div>
+                        </div>
+                    </div>
+
+    <div class="row">
+            
+            <style>
+                    #chartdiv {
+                      width: 100%;
+                      height: 300px;
+                    }
+                    
+                    #chartdiv3 {
+                      width: 100%;
+                      height: 300px;
+                    }
+                    #chartdiv4 {
+                      width: 100%;
+                      height: 300px;
+                    }
+                    </style>
+                    
+                    <!-- Resources -->
+                    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+                    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+                    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+                    <script src="https://www.amcharts.com/lib/4/themes/frozen.js"></script>
+                    
+                   
+                    <script>
+                    am4core.ready(function() {
+                    
+                   
+                    am4core.useTheme(am4themes_animated);
+                 
+                    
+                    var chart = am4core.create("chartdiv", am4charts.PieChart);
+                    chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+                    var today = new Date();
+                    var dd = String(today.getDate()).padStart(2, '0');
+                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                    var yyyy = today.getFullYear();
+
+                    today = yyyy + '-' + mm + '-' + dd;
+                    var data=today + '/' + today;
+                    $.ajax({
+           
+            url:"/oposapp/meals_summary",
+            type: "POST",
+            data: JSON.stringify(data),
+            dataType: 'text',
+            //data: {name: name, age: age},
+            success:function(response){
+          
+            console.log('success');
+            
+            },
+            complete:function(){},
+            error:function (xhr, textStatus, thrownError){
+             console.log("Could Not Submit Order");
+        }
+        });
+                    
+                    chart.data = [
+                      {
+                        country: "Fish",
+                        value: 401
+                      },
+                      {
+                        country: "Chapo",
+                        value: 300
+                      },
+                      {
+                        country: "Kienyeji",
+                        value: 200
+                      },
+                      {
+                        country: "Aliya",
+                        value: 165
+                      },
+                      {
+                        country: "African Tea",
+                        value: 139
+                      },
+                      {
+                        country: "Porridge",
+                        value: 128
+                      }
+                    ];
+                    chart.radius = am4core.percent(70);
+                    chart.innerRadius = am4core.percent(40);
+                    chart.startAngle = 180;
+                    chart.endAngle = 360;  
+                    
+                    var series = chart.series.push(new am4charts.PieSeries());
+                    series.dataFields.value = "value";
+                    series.dataFields.category = "country";
+                    
+                    series.slices.template.cornerRadius = 10;
+                    series.slices.template.innerCornerRadius = 7;
+                    series.slices.template.draggable = true;
+                    series.slices.template.inert = true;
+                    series.alignLabels = false;
+                    
+                    series.hiddenState.properties.startAngle = 90;
+                    series.hiddenState.properties.endAngle = 90;
+                    
+                    chart.legend = new am4charts.Legend();
+                    
+                    }); // end am4core.ready()
+                    </script>
+                    <script>
+                        am4core.ready(function() {
+                        
+                        // Themes begin
+                        am4core.useTheme(am4themes_animated);
+                        // Themes end
+                        
+                        /**
+                         * Chart design taken from Samsung health app
+                         */
+                        
+                        var chart = am4core.create("chartdiv3", am4charts.XYChart);
+                        chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+                        
+                        chart.paddingBottom = 30;
+                        
+                        chart.data = [{
+                            "name": "Miriam",
+                            "steps": 120,
+                            "href": "https://www.amcharts.com/wp-content/uploads/2019/04/monica.jpg"
+                        }, {
+                            "name": "Eunice",
+                            "steps": 128,
+                            "href": "https://www.amcharts.com/wp-content/uploads/2019/04/joey.jpg"
+                        }];
+                        
+                        var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+                        categoryAxis.dataFields.category = "name";
+                        categoryAxis.renderer.grid.template.strokeOpacity = 0;
+                        categoryAxis.renderer.minGridDistance = 10;
+                        categoryAxis.renderer.labels.template.dy = 35;
+                        categoryAxis.renderer.tooltip.dy = 35;
+                        
+                        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+                        valueAxis.renderer.inside = true;
+                        valueAxis.renderer.labels.template.fillOpacity = 0.3;
+                        valueAxis.renderer.grid.template.strokeOpacity = 0;
+                        valueAxis.min = 0;
+                        valueAxis.cursorTooltipEnabled = false;
+                        valueAxis.renderer.baseGrid.strokeOpacity = 0;
+                        
+                        var series = chart.series.push(new am4charts.ColumnSeries);
+                        series.dataFields.valueY = "steps";
+                        series.dataFields.categoryX = "name";
+                        series.tooltipText = "{valueY.value}";
+                        series.tooltip.pointerOrientation = "vertical";
+                        series.tooltip.dy = - 6;
+                        series.columnsContainer.zIndex = 100;
+                        
+                        var columnTemplate = series.columns.template;
+                        columnTemplate.width = am4core.percent(50);
+                        columnTemplate.maxWidth = 66;
+                        columnTemplate.column.cornerRadius(60, 60, 10, 10);
+                        columnTemplate.strokeOpacity = 0;
+                        
+                        series.heatRules.push({ target: columnTemplate, property: "fill", dataField: "valueY", min: am4core.color("#e5dc36"), max: am4core.color("#5faa46") });
+                        series.mainContainer.mask = undefined;
+                        
+                        var cursor = new am4charts.XYCursor();
+                        chart.cursor = cursor;
+                        cursor.lineX.disabled = true;
+                        cursor.lineY.disabled = true;
+                        cursor.behavior = "none";
+                        
+                        var bullet = columnTemplate.createChild(am4charts.CircleBullet);
+                        bullet.circle.radius = 30;
+                        bullet.valign = "bottom";
+                        bullet.align = "center";
+                        bullet.isMeasured = true;
+                        bullet.mouseEnabled = false;
+                        bullet.verticalCenter = "bottom";
+                        bullet.interactionsEnabled = false;
+                        
+                        var hoverState = bullet.states.create("hover");
+                        var outlineCircle = bullet.createChild(am4core.Circle);
+                        outlineCircle.adapter.add("radius", function (radius, target) {
+                            var circleBullet = target.parent;
+                            return circleBullet.circle.pixelRadius + 10;
+                        })
+                        
+                        var image = bullet.createChild(am4core.Image);
+                        image.width = 60;
+                        image.height = 60;
+                        image.horizontalCenter = "middle";
+                        image.verticalCenter = "middle";
+                        image.propertyFields.href = "href";
+                        
+                        image.adapter.add("mask", function (mask, target) {
+                            var circleBullet = target.parent;
+                            return circleBullet.circle;
+                        })
+                        
+                        var previousBullet;
+                        chart.cursor.events.on("cursorpositionchanged", function (event) {
+                            var dataItem = series.tooltipDataItem;
+                        
+                            if (dataItem.column) {
+                                var bullet = dataItem.column.children.getIndex(1);
+                        
+                                if (previousBullet && previousBullet != bullet) {
+                                    previousBullet.isHover = false;
+                                }
+                        
+                                if (previousBullet != bullet) {
+                        
+                                    var hs = bullet.states.getKey("hover");
+                                    hs.properties.dy = -bullet.parent.pixelHeight + 30;
+                                    bullet.isHover = true;
+                        
+                                    previousBullet = bullet;
+                                }
+                            }
+                        })
+                        
+                        }); // end am4core.ready()
+                        </script>
+                        <script>
+                            am4core.ready(function() {
+                            
+                            // Themes begin
+                            am4core.useTheme(am4themes_frozen);
+                            am4core.useTheme(am4themes_animated);
+                            // Themes end
+                            
+                            var chart = am4core.create( "chartdiv4", am4charts.XYChart );
+                            chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+                            
+                            chart.maskBullets = false;
+                            
+                            var xAxis = chart.xAxes.push( new am4charts.CategoryAxis() );
+                            var yAxis = chart.yAxes.push( new am4charts.CategoryAxis() );
+                            
+                            xAxis.dataFields.category = "x";
+                            yAxis.dataFields.category = "y";
+                            
+                            xAxis.renderer.grid.template.disabled = true;
+                            xAxis.renderer.minGridDistance = 40;
+                            
+                            yAxis.renderer.grid.template.disabled = true;
+                            yAxis.renderer.inversed = true;
+                            yAxis.renderer.minGridDistance = 30;
+                            
+                            var series = chart.series.push( new am4charts.ColumnSeries() );
+                            series.dataFields.categoryX = "x";
+                            series.dataFields.categoryY = "y";
+                            series.dataFields.value = "value";
+                            series.sequencedInterpolation = true;
+                            series.defaultState.transitionDuration = 3000;
+                            
+                            // Set up column appearance
+                            var column = series.columns.template;
+                            column.strokeWidth = 2;
+                            column.strokeOpacity = 1;
+                            column.stroke = am4core.color( "#ffffff" );
+                            column.tooltipText = "{x}, {y}: {value.workingValue.formatNumber('#.')}";
+                            column.width = am4core.percent( 100 );
+                            column.height = am4core.percent( 100 );
+                            column.column.cornerRadius(6, 6, 6, 6);
+                            column.propertyFields.fill = "color";
+                            
+                            // Set up bullet appearance
+                            var bullet1 = series.bullets.push(new am4charts.CircleBullet());
+                            bullet1.circle.propertyFields.radius = "value";
+                            bullet1.circle.fill = am4core.color("#000");
+                            bullet1.circle.strokeWidth = 0;
+                            bullet1.circle.fillOpacity = 0.7;
+                            bullet1.interactionsEnabled = false;
+                            
+                            var bullet2 = series.bullets.push(new am4charts.LabelBullet());
+                            bullet2.label.text = "{value}";
+                            bullet2.label.fill = am4core.color("#fff");
+                            bullet2.zIndex = 1;
+                            bullet2.fontSize = 11;
+                            bullet2.interactionsEnabled = false;
+                            
+                            // define colors
+                            var colors = {
+                              "critical": chart.colors.getIndex(0).brighten(-0.8),
+                              "bad": chart.colors.getIndex(1).brighten(-0.6),
+                              "medium": chart.colors.getIndex(1).brighten(-0.4),
+                              "good": chart.colors.getIndex(1).brighten(-0.2),
+                              "verygood": chart.colors.getIndex(1).brighten(0)
+                            };
+                            
+                            chart.data = [ {
+                              "y": "Critical",
+                              "x": "Very good",
+                              "color": colors.medium,
+                              "value": 20
+                            }, {
+                              "y": "Bad",
+                              "x": "Very good",
+                              "color": colors.good,
+                              "value": 15
+                            }, {
+                              "y": "Medium",
+                              "x": "Very good",
+                              "color": colors.verygood,
+                              "value": 25
+                            }, {
+                              "y": "Good",
+                              "x": "Very good",
+                              "color": colors.verygood,
+                              "value": 15
+                            }, {
+                              "y": "Very good",
+                              "x": "Very good",
+                              "color": colors.verygood,
+                              "value": 12
+                            },
+                            
+                            {
+                              "y": "Critical",
+                              "x": "Good",
+                              "color": colors.bad,
+                              "value": 30
+                            }, {
+                              "y": "Bad",
+                              "x": "Good",
+                              "color": colors.medium,
+                              "value": 24
+                            }, {
+                              "y": "Medium",
+                              "x": "Good",
+                              "color": colors.good,
+                              "value": 25
+                            }, {
+                              "y": "Good",
+                              "x": "Good",
+                              "color": colors.verygood,
+                              "value": 15
+                            }, {
+                              "y": "Very good",
+                              "x": "Good",
+                              "color": colors.verygood,
+                              "value": 25
+                            },
+                            
+                            {
+                              "y": "Critical",
+                              "x": "Medium",
+                              "color": colors.bad,
+                              "value": 33
+                            }, {
+                              "y": "Bad",
+                              "x": "Medium",
+                              "color": colors.bad,
+                              "value": 14
+                            }, {
+                              "y": "Medium",
+                              "x": "Medium",
+                              "color": colors.medium,
+                              "value": 20
+                            }, {
+                              "y": "Good",
+                              "x": "Medium",
+                              "color": colors.good,
+                              "value": 19
+                            }, {
+                              "y": "Very good",
+                              "x": "Medium",
+                              "color": colors.good,
+                              "value": 25
+                            },
+                            
+                            {
+                              "y": "Critical",
+                              "x": "Bad",
+                              "color": colors.critical,
+                              "value": 31
+                            }, {
+                              "y": "Bad",
+                              "x": "Bad",
+                              "color": colors.critical,
+                              "value": 24
+                            }, {
+                              "y": "Medium",
+                              "x": "Bad",
+                              "color": colors.bad,
+                              "value": 25
+                            }, {
+                              "y": "Good",
+                              "x": "Bad",
+                              "color": colors.medium,
+                              "value": 15
+                            }, {
+                              "y": "Very good",
+                              "x": "Bad",
+                              "color": colors.good,
+                              "value": 15
+                            },
+                            
+                            {
+                              "y": "Critical",
+                              "x": "Critical",
+                              "color": colors.critical,
+                              "value": 12
+                            }, {
+                              "y": "Bad",
+                              "x": "Critical",
+                              "color": colors.critical,
+                              "value": 14
+                            }, {
+                              "y": "Medium",
+                              "x": "Critical",
+                              "color": colors.critical,
+                              "value": 15
+                            }, {
+                              "y": "Good",
+                              "x": "Critical",
+                              "color": colors.bad,
+                              "value": 25
+                            }, {
+                              "y": "Very good",
+                              "x": "Critical",
+                              "color": colors.medium,
+                              "value": 19
+                            }
+                            ];
+                            
+                            }); // end am4core.ready()
+                            </script>
+                  
+                    <style>
+
+
+                            #chartdiv2 {
+                              width: 100%;
+                              height: 300px;
+                            }
+                            
+                            </style>
+                            
+                    
+                            
+                            <!-- Chart code -->
+                            <script>
+                            am4core.ready(function() {
+                            
+                            // Themes begin
+                            am4core.useTheme(am4themes_animated);
+                            // Themes end
+                            
+                            // Create chart instance
+                            var chart = am4core.create("chartdiv2", am4charts.XYChart);
+
+                            var today = new Date();
+                    var dd = String(today.getDate()).padStart(2, '0');
+                    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                    var yyyy = today.getFullYear();
+
+                    today = yyyy + '-' + mm + '-' + dd;
+                    var data=today + '/' + today;
+                    $.ajax({
+           
+            url:"/oposapp/meals_summary",
+            type: "POST",
+            data: JSON.stringify(data),
+            dataType: 'text',
+            //data: {name: name, age: age},
+            success:function(response){
+          
+            console.log('success');
+            var responsez = JSON.parse(response);
+            var result = { }; // PLACEHOLDER
+            var jsonObj;
+            $.each(responsez, function(index, valuez){
+            jsonObj = {
+                
+                  "date": +valuez.fields.pub_date,
+                        "market1":+valuez.fields.price,
+                        "market2":+valuez.fields.price,
+                        "market3":+valuez.fields.price,
+                        "sales1":+valuez.fields.price,
+                        "sales2":+valuez.fields.price,
+
+               
+                       
+                                   
+                 
+            };
+            result.push(jsonObj);
+         });
+         console.log(result);
+
+      
+      
+            
+            },
+            complete:function(){},
+            error:function (xhr, textStatus, thrownError){
+             console.log("Error plotting data");
+        }
+        });
+ chart.data=result;
+                           
+                            
+                            // Create axes
+                            var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+                            //dateAxis.renderer.grid.template.location = 0;
+                            //dateAxis.renderer.minGridDistance = 30;
+                            
+                            var valueAxis1 = chart.yAxes.push(new am4charts.ValueAxis());
+                            valueAxis1.title.text = "Sales";
+                            
+                            var valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
+                            valueAxis2.title.text = "Market Days";
+                            valueAxis2.renderer.opposite = true;
+                            valueAxis2.renderer.grid.template.disabled = true;
+                            
+                            // Create series
+                            var series1 = chart.series.push(new am4charts.ColumnSeries());
+                            series1.dataFields.valueY = "sales1";
+                            series1.dataFields.dateX = "date";
+                            series1.yAxis = valueAxis1;
+                            series1.name = "Target Sales";
+                            series1.tooltipText = "{name}\n[bold font-size: 20]${valueY}";
+                            series1.fill = chart.colors.getIndex(0);
+                            series1.strokeWidth = 0;
+                            series1.clustered = false;
+                            series1.columns.template.width = am4core.percent(40);
+                            
+                            var series2 = chart.series.push(new am4charts.ColumnSeries());
+                            series2.dataFields.valueY = "sales2";
+                            series2.dataFields.dateX = "date";
+                            series2.yAxis = valueAxis1;
+                            series2.name = "Actual Sales";
+                            series2.tooltipText = "{name}\n[bold font-size: 20]${valueY}";
+                            series2.fill = chart.colors.getIndex(0).lighten(0.5);
+                            series2.strokeWidth = 0;
+                            series2.clustered = false;
+                            series2.toBack();
+                            
+                            var series3 = chart.series.push(new am4charts.LineSeries());
+                            series3.dataFields.valueY = "market1";
+                            series3.dataFields.dateX = "date";
+                            series3.name = "Market Days";
+                            series3.strokeWidth = 2;
+                            series3.tensionX = 0.7;
+                            series3.yAxis = valueAxis2;
+                            series3.tooltipText = "{name}\n[bold font-size: 20]{valueY}";
+                            
+                            var bullet3 = series3.bullets.push(new am4charts.CircleBullet());
+                            bullet3.circle.radius = 3;
+                            bullet3.circle.strokeWidth = 2;
+                            bullet3.circle.fill = am4core.color("#fff");
+                            
+                            var series4 = chart.series.push(new am4charts.LineSeries());
+                            series4.dataFields.valueY = "market2";
+                            series4.dataFields.dateX = "date";
+                            series4.name = "Market Days ALL";
+                            series4.strokeWidth = 2;
+                            series4.tensionX = 0.7;
+                            series4.yAxis = valueAxis2;
+                            series4.tooltipText = "{name}\n[bold font-size: 20]{valueY}";
+                            series4.stroke = chart.colors.getIndex(0).lighten(0.5);
+                            series4.strokeDasharray = "3,3";
+                            
+                            var bullet4 = series4.bullets.push(new am4charts.CircleBullet());
+                            bullet4.circle.radius = 3;
+                            bullet4.circle.strokeWidth = 2;
+                            bullet4.circle.fill = am4core.color("#fff");
+                            
+                            // Add cursor
+                            chart.cursor = new am4charts.XYCursor();
+                            
+                            // Add legend
+                            chart.legend = new am4charts.Legend();
+                            chart.legend.position = "top";
+                            
+                            // Add scrollbar
+                            chart.scrollbarX = new am4charts.XYChartScrollbar();
+                            chart.scrollbarX.series.push(series1);
+                            chart.scrollbarX.series.push(series3);
+                            chart.scrollbarX.parent = chart.bottomAxesContainer;
+                            
+                            }); // end am4core.ready()
+                            </script>
+                            
+                            <!-- HTML -->
+                          
+
+
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-content">
+
+                        <table class="table table-striped table-bordered table-hover orders" id="orders" >
+                        <thead>
+                        <tr>
+                                <th>Order ID</th>
+                            <th data-hide="phone">Total</th>
+                            <th data-hide="phone">Date</th>
+
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                            
+                        
+                                {%  for orders in orders_list%}
+
+
+                        <tr>
+                                <td>
+                                        {{forloop.counter}}
+                                        
+                                </td>
+                          
+                            <td>
+                                   
+                                    {{orders.total}}  
+    
+                                </td>
+                           
+                            <td>
+                                    {{orders.pub_date}}
+                            </td>
+
+                           
+                            
+                            
+                        </tr>
+                        {% endfor %} 
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <td colspan="7">
+                                <ul class="pagination float-right"></ul>
+                            </td>
+                            
+                                        
+                                        
+                                    
+                                </tfoot>
+                        </tr>
+                        </tfoot>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">Clear Order Receipt</h4>
+                        <small class="font-bold">Billing information</small>
+                    </div>
+                    <div class="modal-body">
+                        <span style="font-size: 200%;font-weight: bolder;"> Order Details</span>
+                        <table class="table table-striped table-bordered">
+                            <th>Order ID</th>
+                            <th>Total</th>
+                            <tr>
+                                <td class="receiptid"></td>
+                                <td  class="receipt"></td>
+                            </tr>
+                        </table>
+                   
+                    
+                    <hr>
+                    <div class="row" style="text-align: center;">
+                      <form>
+                           
+                            <div class="input-group m-b center" id="cleared">
+                                AMOUNT TENDERED: 
+                                    <input type="text" id="cash" oninput="subtract()" class="form-control" style="font-size: 200%;font-weight: bolder;" >
+                                    <div class="input-group-append"  >
+                                        <span class="input-group-addon">.00</span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    CHANGE<div id="change" style="font-size: 200%;font-weight: bolder;">
+                                        </div>
+                                    
+                       </form>
+                       <img id="success" alt="image" class="rounded-circle" src="{% static 'oposapp/assets/img/success.gif'%}" width="140px" height="140px" />
+                    </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button id="clearb" onclick="clearer()" class="btn btn-white">Clear</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal inmodal fade" id="myModal6" tabindex="-1" role="dialog"  aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title">Raise Flag Order Receipt</h4>
+                            <small class="font-bold">Receipt information</small>
+                        </div>
+                        <div class="modal-body">
+                           <form>
+                                <div class="input-group m-b">
+                                    Reasons
+                                        <input type="text" id="flag" class="form-control" maxlength="40">
+                                        <div class="input-group-append">
+                                            <span class="input-group-addon">.00</span>
+                                            </div>
+                                        </div>
+                           </form>
+                        </div>
+    
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                            <button  type='submit' onclick="flag()" class="btn btn-white" >Submit</button>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+</div>
+
+{% endblock content %}
+{% block scripts %}
+<script>
+
+$('input[name="daterange"]').daterangepicker({
+                      opens: 'left'
+                    }, function(start, end, label) {
+                        window.result=start.format('YYYY-MM-DD') + '/' + end.format('YYYY-MM-DD');
+                        console.log(window.result);
+                      
+                    });
+    var myVal;
+    var total;
+    var x = document.getElementById('clearb');
+    var y = document.getElementById('success');
+     
+      $('#myModal5').on('show.bs.modal', function (event) {
+      myVal = $(event.relatedTarget).data('val');
+     
+     
+      x.style.visibility = 'hidden';
+      y.style.visibility = 'hidden';
+ 
+
+      $.ajax({
+           url:"/oposapp/orderdetails",
+           type: "POST",
+           data: JSON.stringify({'val': myVal}),
+           dataType: 'text',
+           //data: {name: name, age: age},
+           success:function(response){
+               total=response;
+            $('.receiptid').html(myVal);   
+            $('.receipt').html(response);
+           console.log(response);
+           
+           },
+           complete:function(){},
+           error:function (xhr, textStatus, thrownError){
+            
+            $(this).find(".receipt").text("Could Not Get Order");
+       }
+       });
+
+     
+});
+$('#myModal5').on('hidden.bs.modal', function () {
+ location.reload(); 
+})
+
+$('#myModal6').on('show.bs.modal', function (event) {
+      myVal = $(event.relatedTarget).data('val');
+});  
+$('#myModal6').on('hidden.bs.modal', function () {
+ location.reload(); 
+})  
+     
+
+
+      function dataload()
+      {
+        $.ajax({
+           url:"/oposapp/metrics_dishes",
+           type: "POST",
+           data: JSON.stringify({'val': myVal}),
+           dataType: 'text',
+           //data: {name: name, age: age},
+           success:function(response){
+            $('#cleared').html('Cleared Successfully');
+           console.log(response);
+           y.style.visibility = 'visible';
+           
+           },
+           complete:function(){},
+           error:function (xhr, textStatus, thrownError){
+            console.log("Could Not Clear");
+       }
+       });
+        
+
+      }
+      function subtract()
+      {
+        var cash = document.getElementById('cash').value;
+        var change = cash - total;
+        document.getElementById("change").innerHTML=change;
+        if(change>=0)
+        {
+            x.style.visibility = 'visible';
+        }
+      }
+
+      function flag()
+      {
+        var flagz = document.getElementById('flag').value;
+        var data = {"val": myVal,"flag": flagz};
+        $.ajax({
+            
+           url:"/oposapp/flag",
+           type: "POST",
+           data: JSON.stringify(data),
+           dataType: 'text',
+           //data: {name: name, age: age},
+           success:function(response){
+         
+           console.log(response);
+           
+           },
+           complete:function(){},
+           error:function (xhr, textStatus, thrownError){
+            console.log("Could Not Submit Order");
+       }
+       });
+        
+
+      }
+        </script>
+        
+{% endblock scripts %}
+
+
+
+
+
+    <!-- Page-Level Scripts -->
+   
+    
